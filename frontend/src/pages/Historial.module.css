@@ -1,0 +1,261 @@
+.page {
+  padding: 2rem;
+  max-width: 1100px;
+}
+
+/* ── Header ─────────────────────────────────── */
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.subtitle {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+.btnPrimary {
+  padding: 0.6rem 1.1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btnPrimary:hover { background-color: var(--color-primary-hover); text-decoration: none; }
+
+/* ── Filtros ─────────────────────────────────── */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.filterSelect,
+.filterInput {
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  outline: none;
+  transition: border-color 0.15s;
+  height: 36px;
+}
+
+.filterSelect:focus,
+.filterInput:focus { border-color: var(--color-primary); }
+
+.filterSelect { min-width: 160px; }
+
+.filterDateGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterSep {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.btnFilter {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  height: 36px;
+  transition: background-color 0.15s;
+}
+.btnFilter:hover { background-color: var(--color-primary-hover); }
+
+.btnClear {
+  padding: 0.5rem 0.875rem;
+  background: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  height: 36px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btnClear:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+
+/* ── Estados ─────────────────────────────────── */
+.state {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding: 2rem 0;
+}
+
+.stateError {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  background-color: #FFF5F5;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+}
+
+/* ── Empty state ─────────────────────────────── */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+
+.emptyTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.emptyText {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  max-width: 380px;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Tabla ───────────────────────────────────── */
+.tableWrap {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead tr {
+  background-color: var(--color-bg);
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 0.75rem 1rem;
+}
+
+.thRight { text-align: right; }
+
+.table td {
+  padding: 0.9rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+
+.row {
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+.row:hover { background-color: var(--color-bg); }
+
+.tdNumero {
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.tdCliente {
+  color: var(--color-text);
+}
+
+.sinCliente {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.tdFecha {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.tdTotal {
+  text-align: right;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* ── Badges ──────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.badge_borrador  { background-color: #EDF2F7; color: #4A5568; }
+.badge_enviado   { background-color: var(--color-primary-light); color: var(--color-primary); }
+.badge_aceptado  { background-color: rgba(0, 184, 148, 0.12); color: var(--color-success); }
+.badge_rechazado { background-color: rgba(225, 112, 85, 0.12); color: var(--color-danger); }
+.badge_vencido   { background-color: rgba(253, 203, 110, 0.2); color: #B7791F; }
+
+/* ── Footer tabla ────────────────────────────── */
+.tableFooter {
+  padding: 0.6rem 1rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 640px) {
+  .filters { flex-direction: column; align-items: stretch; }
+  .filterDateGroup { flex-direction: column; }
+  .filterSelect, .filterInput, .btnFilter, .btnClear { width: 100%; }
+}

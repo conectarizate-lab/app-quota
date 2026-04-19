@@ -1,0 +1,340 @@
+.page {
+  padding: 2rem;
+  max-width: 1200px;
+}
+
+/* ── Header ─────────────────────────────────── */
+.pageHeader {
+  margin-bottom: 1.75rem;
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+  transition: color 0.15s;
+}
+.back:hover { color: var(--color-text); text-decoration: none; }
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+/* ── Layout dos columnas ─────────────────────── */
+.form { width: 100%; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sidebar {
+  position: sticky;
+  top: 1.5rem;
+}
+
+/* ── Card / sección ──────────────────────────── */
+.card {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ── Campos ──────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.field label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 0.6rem 0.875rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  transition: border-color 0.15s;
+  outline: none;
+  width: 100%;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--color-primary);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* ── Tabla de ítems ──────────────────────────── */
+.tableWrap {
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 580px;
+}
+
+.table thead tr {
+  background-color: var(--color-bg);
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 0.6rem 0.75rem;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.thNombre { width: 28%; }
+.thDesc   { width: 32%; }
+.thNum    { width: 13%; text-align: right; }
+.thCant   { width: 8%;  text-align: right; }
+.thSub    { width: 13%; text-align: right; }
+.thDel    { width: 6%;  }
+
+/* Inputs dentro de la tabla */
+.cellInput {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  background: transparent;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.cellInput:hover {
+  background-color: var(--color-bg);
+  border-color: var(--color-border);
+}
+
+.cellInput:focus {
+  background-color: var(--color-surface);
+  border-color: var(--color-primary);
+}
+
+.cellRight { text-align: right; }
+
+.cellCant { width: 60px; }
+
+.tdSub {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-align: right;
+  padding-right: 0.75rem;
+  white-space: nowrap;
+}
+
+.btnRemove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.15s, color 0.15s;
+}
+.btnRemove:hover:not(:disabled) {
+  background-color: #FFF5F5;
+  color: var(--color-danger);
+}
+.btnRemove:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ── Acciones debajo de la tabla ─────────────── */
+.itemActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.catalogSelect {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.catalogSelect:focus { border-color: var(--color-primary); }
+
+.btnOutline {
+  padding: 0.5rem 0.875rem;
+  background: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btnOutline:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+/* ── Sidebar: totales ────────────────────────── */
+.totales {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.totalDescuento {
+  color: var(--color-success);
+}
+
+.totalFinal {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: 0.25rem;
+}
+
+/* ── Acciones sidebar ────────────────────────── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btnPrimary {
+  padding: 0.7rem 1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.15s;
+}
+.btnPrimary:hover:not(:disabled) { background-color: var(--color-primary-hover); }
+.btnPrimary:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.btnCancel {
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  transition: border-color 0.15s, color 0.15s;
+}
+.btnCancel:hover { border-color: var(--color-text-muted); color: var(--color-text); text-decoration: none; }
+
+.formError {
+  font-size: 0.8125rem;
+  color: var(--color-danger);
+  background-color: #FFF5F5;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+}
+
+/* ── Estado carga ────────────────────────────── */
+.state {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding: 2rem 0;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .row2 {
+    grid-template-columns: 1fr;
+  }
+}

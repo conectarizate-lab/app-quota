@@ -1,0 +1,257 @@
+.page {
+  padding: 2rem;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Bienvenida ──────────────────────────────── */
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.3px;
+}
+
+.subtitle {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+.btnPrimary {
+  padding: 0.6rem 1.1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btnPrimary:hover { background-color: var(--color-primary-hover); text-decoration: none; }
+
+/* ── Error ───────────────────────────────────── */
+.stateError {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  background-color: #FFF5F5;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+}
+
+/* ── Stat cards ──────────────────────────────── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.statCard {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.statGreen { color: var(--color-success); }
+.statBlue  { color: var(--color-primary); }
+
+.statSub {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ── Sección últimos presupuestos ────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.sectionLink {
+  font-size: 0.8125rem;
+  color: var(--color-primary);
+}
+.sectionLink:hover { text-decoration: underline; }
+
+/* ── Estado carga ────────────────────────────── */
+.state {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+/* ── Empty state ─────────────────────────────── */
+.empty {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.emptyTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.emptyText {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  max-width: 360px;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.quickLinks {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.quickLink {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+.quickLink:hover { text-decoration: underline; }
+
+/* ── Tabla ───────────────────────────────────── */
+.tableWrap {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead tr {
+  background-color: var(--color-bg);
+  border-bottom: 1.5px solid var(--color-border);
+}
+
+.table th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 0.75rem 1rem;
+}
+
+.thRight { text-align: right; }
+
+.table td {
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+
+.row:hover { background-color: var(--color-bg); }
+
+.linkNumero {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.linkNumero:hover { text-decoration: underline; }
+
+.tdCliente { color: var(--color-text); }
+
+.sinCliente {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.tdMuted { color: var(--color-text-muted); }
+
+.tdTotal {
+  text-align: right;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* ── Badges ──────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.badge_borrador  { background-color: #EDF2F7; color: #4A5568; }
+.badge_enviado   { background-color: var(--color-primary-light); color: var(--color-primary); }
+.badge_aceptado  { background-color: rgba(0, 184, 148, 0.12); color: var(--color-success); }
+.badge_rechazado { background-color: rgba(225, 112, 85, 0.12); color: var(--color-danger); }
+.badge_vencido   { background-color: rgba(253, 203, 110, 0.2); color: #B7791F; }
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 900px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .statsGrid { grid-template-columns: 1fr; }
+  .welcome { flex-direction: column; align-items: flex-start; }
+}
