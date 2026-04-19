@@ -17,7 +17,7 @@ export default function Clientes() {
   const load = async () => {
     try {
       const { data } = await getClientes()
-      setClientes(data.data)
+      setClientes(data.data.clientes)
     } catch {
       setError('No se pudieron cargar los clientes')
     } finally {

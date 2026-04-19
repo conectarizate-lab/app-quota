@@ -18,7 +18,7 @@ export default function Servicios() {
   const load = async () => {
     try {
       const { data } = await getServicios()
-      setServicios(data.data)
+      setServicios(data.data.servicios)
     } catch {
       setError('No se pudieron cargar los servicios')
     } finally {

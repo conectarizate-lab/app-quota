@@ -36,8 +36,8 @@ export default function NuevoPresupuesto() {
   useEffect(() => {
     Promise.all([getClientes(), getServicios()])
       .then(([c, s]) => {
-        setClientes(c.data.data)
-        setServicios(s.data.data)
+        setClientes(c.data.data.clientes)
+        setServicios(s.data.data.servicios)
       })
       .catch(() => setError('Error al cargar datos. Recargá la página.'))
       .finally(() => setLoading(false))
@@ -275,7 +275,7 @@ export default function NuevoPresupuesto() {
 
           {/* ── Sidebar totales ── */}
           <aside className={styles.sidebar}>
-            <div className={styles.card}>
+            <div className={`${styles.card} ${styles.sidebarCard}`}>
               <h2 className={styles.sectionTitle}>Resumen</h2>
 
               <div className={styles.field}>

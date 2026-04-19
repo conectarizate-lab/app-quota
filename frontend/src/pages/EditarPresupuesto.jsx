@@ -38,8 +38,8 @@ export default function EditarPresupuesto() {
   useEffect(() => {
     Promise.all([getClientes(), getServicios(), getPresupuesto(id)])
       .then(([c, s, p]) => {
-        setClientes(c.data.data)
-        setServicios(s.data.data)
+        setClientes(c.data.data.clientes)
+        setServicios(s.data.data.servicios)
 
         const pres = p.data.data.presupuesto
         setNumero(pres.numero)
@@ -293,7 +293,7 @@ export default function EditarPresupuesto() {
 
           {/* ── Sidebar totales ── */}
           <aside className={styles.sidebar}>
-            <div className={styles.card}>
+            <div className={`${styles.card} ${styles.sidebarCard}`}>
               <h2 className={styles.sectionTitle}>Resumen</h2>
 
               <div className={styles.field}>
