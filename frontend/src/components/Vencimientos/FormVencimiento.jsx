@@ -14,7 +14,7 @@ const EMPTY = {
 }
 
 export default function FormVencimiento({ inicial, onGuardar, onCerrar, loading }) {
-  const [form, setForm]       = useState(inicial ?? EMPTY)
+  const [form, setForm]       = useState({ ...EMPTY, ...(inicial ?? {}) })
   const [clientes, setClientes] = useState([])
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function FormVencimiento({ inicial, onGuardar, onCerrar, loading 
   }, [])
 
   useEffect(() => {
-    setForm(inicial ?? EMPTY)
+    setForm({ ...EMPTY, ...(inicial ?? {}) })
   }, [inicial])
 
   const set = (field, value) => setForm(f => ({ ...f, [field]: value }))

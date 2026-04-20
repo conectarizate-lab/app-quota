@@ -192,7 +192,7 @@ export default function Vencimientos() {
             fecha_vencimiento:  editando.fecha_vencimiento,
             recurrencia:        editando.recurrencia,
             notas:              editando.notas ?? '',
-          } : null}
+          } : { tipo: tab }}
           onGuardar={guardar}
           onCerrar={cerrarForm}
           loading={saving}
