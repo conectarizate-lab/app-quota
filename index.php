@@ -5,6 +5,14 @@
  * All requests are rewritten here by .htaccess.
  */
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+set_exception_handler(function(Throwable $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine()]);
+    exit;
+});
+
 header('Content-Type: application/json; charset=utf-8');
 
 require_once __DIR__ . '/config/db.php';
