@@ -64,5 +64,5 @@ switch ($resource) {
         require __DIR__ . '/routes/presupuestos.php';
         break;
     default:
-        respond(false, null, 'Ruta no encontrada', 404);
+        respond(false, null, 'Ruta no encontrada | resource=' . $resource . ' id=' . $id . ' path=' . $path . ' SCRIPT_NAME=' . $_SERVER['SCRIPT_NAME'] . ' REQUEST_URI=' . $_SERVER['REQUEST_URI'], 404);
 }
