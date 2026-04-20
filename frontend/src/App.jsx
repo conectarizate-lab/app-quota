@@ -4,6 +4,8 @@ import Layout from './components/Layout/Layout'
 
 import Login            from './pages/Login'
 import Register         from './pages/Register'
+import ForgotPassword  from './pages/ForgotPassword'
+import ResetPassword   from './pages/ResetPassword'
 import Dashboard        from './pages/Dashboard'
 import Servicios        from './pages/Servicios'
 import Clientes         from './pages/Clientes'
@@ -29,8 +31,10 @@ export default function App() {
   return (
     <Routes>
       {/* Rutas públicas */}
-      <Route path="/login"    element={<PublicRoute><Login /></PublicRoute>} />
-      <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+      <Route path="/login"           element={<PublicRoute><Login /></PublicRoute>} />
+      <Route path="/register"        element={<PublicRoute><Register /></PublicRoute>} />
+      <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+      <Route path="/reset-password"  element={<ResetPassword />} />
 
       {/* Rutas privadas con layout */}
       <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>

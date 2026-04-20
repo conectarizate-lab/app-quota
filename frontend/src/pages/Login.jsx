@@ -75,6 +75,9 @@ export default function Login() {
         <p className={styles.link}>
           ¿No tenés cuenta? <Link to="/register">Registrate gratis</Link>
         </p>
+        <p className={styles.link}>
+          <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+        </p>
       </div>
     </div>
   )

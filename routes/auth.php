@@ -154,4 +154,68 @@ if ($method === 'PUT' && $id === 'me') {
     respond(true, ['usuario' => $stmt->fetch()]);
 }
 
+// POST /auth/forgot-password
+if ($method === 'POST' && $id === 'forgot-password') {
+    $body  = getBody();
+    $email = trim(strtolower($body['email'] ?? ''));
+
+    if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        respond(false, null, 'Email inválido', 422);
+    }
+
+    $db   = getDB();
+    $stmt = $db->prepare('SELECT id FROM usuarios WHERE email = ? AND activo = 1');
+    $stmt->execute([$email]);
+
+    if ($stmt->fetch()) {
+        $token     = bin2hex(random_bytes(32));
+        $expiresAt = date('Y-m-d H:i:s', time() + 3600);
+
+        $db->prepare(
+            'INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)'
+        )->execute([$email, $token, $expiresAt]);
+
+        $link    = 'https://quota.conectarizate.com/reset-password?token=' . $token;
+        $subject = 'Quota — Recuperá tu contraseña';
+        $msg     = "Hola,\n\nRecibimos una solicitud para recuperar tu contraseña de Quota.\n\n"
+                 . "Hacé clic en este enlace para crear una nueva (válido por 1 hora):\n\n"
+                 . $link . "\n\nSi no pediste esto, ignorá este email.\n\nQuota";
+        $headers = "From: Quota <noreply@conectarizate.com>\r\nContent-Type: text/plain; charset=UTF-8";
+
+        mail($email, $subject, $msg, $headers);
+    }
+
+    respond(true, null, 'Si el email está registrado, recibirás un enlace en breve');
+}
+
+// POST /auth/reset-password
+if ($method === 'POST' && $id === 'reset-password') {
+    $body     = getBody();
+    $token    = trim($body['token'] ?? '');
+    $password = $body['password'] ?? '';
+
+    if (!$token || strlen($password) < 8) {
+        respond(false, null, 'Token y contraseña (mínimo 8 caracteres) son requeridos', 422);
+    }
+
+    $db   = getDB();
+    $stmt = $db->prepare(
+        'SELECT * FROM password_resets WHERE token = ? AND used = 0 AND expires_at > NOW()'
+    );
+    $stmt->execute([$token]);
+    $reset = $stmt->fetch();
+
+    if (!$reset) {
+        respond(false, null, 'El enlace es inválido o ya expiró', 400);
+    }
+
+    $hash = password_hash($password, PASSWORD_BCRYPT);
+    $db->prepare('UPDATE usuarios SET password_hash = ? WHERE email = ?')
+       ->execute([$hash, $reset['email']]);
+    $db->prepare('UPDATE password_resets SET used = 1 WHERE id = ?')
+       ->execute([$reset['id']]);
+
+    respond(true, null, 'Contraseña actualizada correctamente');
+}
+
 respond(false, null, 'Método no permitido', 405);

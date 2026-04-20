@@ -98,4 +98,17 @@ CREATE TABLE IF NOT EXISTS `presupuesto_items` (
     FOREIGN KEY (`servicio_id`) REFERENCES `servicios` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ── password_resets ───────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `id`          INT UNSIGNED    NOT NULL AUTO_INCREMENT,
+  `email`       VARCHAR(200)    NOT NULL,
+  `token`       VARCHAR(64)     NOT NULL,
+  `expires_at`  DATETIME        NOT NULL,
+  `used`        TINYINT(1)      NOT NULL DEFAULT 0,
+  `created_at`  TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_token` (`token`),
+  KEY `idx_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;
