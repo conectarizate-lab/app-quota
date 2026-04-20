@@ -19,7 +19,7 @@ $resource = $segments[0] ?? '';
 $id       = (isset($segments[1]) && $segments[1] !== '') ? $segments[1] : null;
 $action   = (isset($segments[2]) && $segments[2] !== '') ? $segments[2] : null;
 
-$apiRoutes = ['auth', 'servicios', 'clientes', 'presupuestos'];
+$apiRoutes = ['auth', 'servicios', 'clientes', 'presupuestos', 'vencimientos'];
 
 if (!in_array($resource, $apiRoutes)) {
     header('Content-Type: text/html; charset=utf-8');
@@ -39,5 +39,8 @@ switch ($resource) {
         break;
     case 'presupuestos':
         require __DIR__ . '/routes/presupuestos.php';
+        break;
+    case 'vencimientos':
+        require __DIR__ . '/routes/vencimientos.php';
         break;
 }

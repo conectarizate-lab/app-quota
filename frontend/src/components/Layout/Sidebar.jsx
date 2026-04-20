@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { to: '/dashboard',          label: 'Dashboard',      icon: '▦' },
   { to: '/servicios',          label: 'Mis servicios',  icon: '⊞' },
   { to: '/clientes',           label: 'Clientes',       icon: '◎' },
+  { to: '/vencimientos',       label: 'Vencimientos',   icon: '◷' },
   { to: '/historial',          label: 'Historial',      icon: '≡' },
   { to: '/configuracion',      label: 'Configuración',  icon: '⚙' },
 ]

@@ -12,6 +12,7 @@ import Clientes         from './pages/Clientes'
 import NuevoPresupuesto from './pages/NuevoPresupuesto'
 import EditarPresupuesto from './pages/EditarPresupuesto'
 import VerPresupuesto   from './pages/VerPresupuesto'
+import Vencimientos     from './pages/Vencimientos'
 import Historial        from './pages/Historial'
 import Configuracion    from './pages/Configuracion'
 
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="presupuestos/nuevo"            element={<NuevoPresupuesto />} />
         <Route path="presupuestos/:id/editar"       element={<EditarPresupuesto />} />
         <Route path="presupuestos/:id"              element={<VerPresupuesto />} />
+        <Route path="vencimientos"                 element={<Vencimientos />} />
         <Route path="historial"                    element={<Historial />} />
         <Route path="configuracion"                element={<Configuracion />} />
       </Route>

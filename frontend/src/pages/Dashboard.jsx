@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { getPresupuestos } from '../api/presupuestos'
 import { useAuth } from '../hooks/useAuth'
 import { formatCurrency } from '../utils/formatCurrency'
+import AlertasWidget from '../components/Vencimientos/AlertasWidget'
 import styles from './Dashboard.module.css'
 
 const ESTADOS_COLOR = {
@@ -101,6 +102,9 @@ export default function Dashboard() {
           )}
         </div>
       </div>
+
+      {/* Widget de vencimientos */}
+      <AlertasWidget />
 
       {/* Últimos presupuestos */}
       <div className={styles.section}>

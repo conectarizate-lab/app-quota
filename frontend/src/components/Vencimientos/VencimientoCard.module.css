@@ -1,0 +1,118 @@
+.card {
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-left-width: 4px;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.borde_rojo    { border-left-color: var(--color-danger); }
+.borde_naranja { border-left-color: #E67E22; }
+.borde_amarillo { border-left-color: var(--color-warning); }
+.borde_gris    { border-left-color: var(--color-border); }
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info { flex: 1; }
+
+.concepto {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.cliente {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.monto {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.moneda {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.fecha {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.badges {
+  display: flex;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.badge_rojo     { background-color: rgba(225, 112, 85, 0.12); color: var(--color-danger); }
+.badge_naranja  { background-color: rgba(230, 126, 34, 0.12); color: #C05621; }
+.badge_amarillo { background-color: rgba(253, 203, 110, 0.25); color: #B7791F; }
+.badge_gris     { background-color: #EDF2F7; color: #4A5568; }
+.badge_recurrencia { background-color: var(--color-primary-light); color: var(--color-primary); }
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--color-border);
+  cursor: pointer;
+  background: transparent;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.btnRecordatorio { color: var(--color-primary); border-color: var(--color-primary); }
+.btnRecordatorio:hover { background-color: var(--color-primary-light); }
+
+.btnCobrar { color: var(--color-success); border-color: var(--color-success); }
+.btnCobrar:hover { background-color: rgba(0, 184, 148, 0.1); }
+
+.btnEditar { color: var(--color-text-muted); }
+.btnEditar:hover { background-color: var(--color-bg); }
+
+.btnEliminar { color: var(--color-danger); border-color: transparent; }
+.btnEliminar:hover { background-color: rgba(225, 112, 85, 0.08); }

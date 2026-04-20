@@ -111,4 +111,42 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `idx_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ── vencimientos ──────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `vencimientos` (
+  `id`                INT UNSIGNED                                                                NOT NULL AUTO_INCREMENT,
+  `usuario_id`        INT UNSIGNED                                                                NOT NULL,
+  `tipo`              ENUM('cobro','pago')                                                        NOT NULL,
+  `concepto`          VARCHAR(200)                                                               NOT NULL,
+  `monto`             DECIMAL(12,2)                                                              NULL DEFAULT NULL,
+  `moneda`            ENUM('ARS','USD','UYU')                                                    NOT NULL DEFAULT 'ARS',
+  `cliente_id`        INT UNSIGNED                                                                NULL DEFAULT NULL,
+  `fecha_vencimiento` DATE                                                                        NOT NULL,
+  `recurrencia`       ENUM('unico','semanal','mensual','anual')                                  NOT NULL DEFAULT 'unico',
+  `estado`            ENUM('pendiente','recordatorio_enviado','cobrado','pagado','vencido')       NOT NULL DEFAULT 'pendiente',
+  `notas`             TEXT                                                                        NULL,
+  `created_at`        TIMESTAMP                                                                   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at`        TIMESTAMP                                                                   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_vencimientos_usuario` (`usuario_id`),
+  KEY `idx_vencimientos_fecha`   (`usuario_id`, `fecha_vencimiento`),
+  CONSTRAINT `fk_vencimientos_usuario`
+    FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_vencimientos_cliente`
+    FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ── vencimientos_historial ─────────────────────────────────
+CREATE TABLE IF NOT EXISTS `vencimientos_historial` (
+  `id`              INT UNSIGNED    NOT NULL AUTO_INCREMENT,
+  `vencimiento_id`  INT UNSIGNED    NOT NULL,
+  `fecha_pago`      DATE            NOT NULL,
+  `monto_pagado`    DECIMAL(12,2)   NULL DEFAULT NULL,
+  `notas`           TEXT            NULL,
+  `created_at`      TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_historial_vencimiento` (`vencimiento_id`),
+  CONSTRAINT `fk_historial_vencimiento`
+    FOREIGN KEY (`vencimiento_id`) REFERENCES `vencimientos` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 SET FOREIGN_KEY_CHECKS = 1;
