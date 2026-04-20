@@ -4,12 +4,12 @@
  * Update the constants below with your Hostinger MySQL credentials.
  */
 
-define('DB_HOST',    'localhost');
-define('DB_NAME',    getenv('DB_NAME') ?: 'your_db_name');
-define('DB_USER',    getenv('DB_USER') ?: 'your_db_user');
-define('DB_PASS',    getenv('DB_PASS') ?: '');
-define('JWT_SECRET', getenv('JWT_SECRET') ?: 'CHANGE_THIS');
-define('JWT_EXPIRY', 604800);
+if (!file_exists(__DIR__ . '/db.local.php')) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Falta config/db.local.php con las credenciales']);
+    exit;
+}
+require __DIR__ . '/db.local.php';
 
 /**
  * Returns a singleton PDO connection.
