@@ -19,6 +19,14 @@ $resource = $segments[0] ?? '';
 $id       = (isset($segments[1]) && $segments[1] !== '') ? $segments[1] : null;
 $action   = (isset($segments[2]) && $segments[2] !== '') ? $segments[2] : null;
 
+$apiRoutes = ['auth', 'servicios', 'clientes', 'presupuestos'];
+
+if (!in_array($resource, $apiRoutes)) {
+    header('Content-Type: text/html; charset=utf-8');
+    readfile(__DIR__ . '/index.html');
+    exit;
+}
+
 switch ($resource) {
     case 'auth':
         require __DIR__ . '/routes/auth.php';
@@ -32,6 +40,4 @@ switch ($resource) {
     case 'presupuestos':
         require __DIR__ . '/routes/presupuestos.php';
         break;
-    default:
-        respond(false, null, 'Ruta no encontrada', 404);
 }
