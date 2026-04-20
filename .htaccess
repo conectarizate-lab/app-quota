@@ -1,0 +1,18 @@
+DirectoryIndex index.html index.php
+
+RewriteEngine On
+
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+Header always set Access-Control-Allow-Headers "Authorization, Content-Type"
+
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^ - [R=200,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^(auth|servicios|clientes|presupuestos)(/.*)?$ index.php?_path=$1$2 [QSA,L]
+
+RewriteRule ^ index.html [L]
