@@ -13,6 +13,6 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-RewriteRule ^(auth|servicios|clientes|presupuestos)(/.*)?$ index.php?_path=$1$2 [QSA,L]
+RewriteRule ^(auth|servicios|clientes|presupuestos|vencimientos)(/.*)?$ index.php?_path=$1$2 [QSA,L]
 
 RewriteRule ^ index.html [L]
