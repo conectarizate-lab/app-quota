@@ -4,17 +4,12 @@
  * Update the constants below with your Hostinger MySQL credentials.
  */
 
-// Credenciales reales en db.local.php (no está en git, nunca se sobreescribe con deploys)
-if (file_exists(__DIR__ . '/db.local.php')) {
-    require __DIR__ . '/db.local.php';
-} else {
-    define('DB_HOST',    'localhost');
-    define('DB_NAME',    'your_db_name');
-    define('DB_USER',    'your_db_user');
-    define('DB_PASS',    'your_db_password');
-    define('JWT_SECRET', 'CHANGE_THIS');
-    define('JWT_EXPIRY', 604800);
-}
+define('DB_HOST',    'localhost');
+define('DB_NAME',    getenv('DB_NAME') ?: 'your_db_name');
+define('DB_USER',    getenv('DB_USER') ?: 'your_db_user');
+define('DB_PASS',    getenv('DB_PASS') ?: '');
+define('JWT_SECRET', getenv('JWT_SECRET') ?: 'CHANGE_THIS');
+define('JWT_EXPIRY', 604800);
 
 /**
  * Returns a singleton PDO connection.
