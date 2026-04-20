@@ -39,6 +39,16 @@ $resource = $segments[0] ?? '';
 $id       = (isset($segments[1]) && $segments[1] !== '') ? $segments[1] : null;
 $action   = (isset($segments[2]) && $segments[2] !== '') ? $segments[2] : null;
 
+// ── DEBUG (remover después) ───────────────────────────────────────────────────
+if (isset($_GET['_debug'])) {
+    echo json_encode(compact('method','path','resource','id','action') + [
+        'SCRIPT_NAME'  => $_SERVER['SCRIPT_NAME'],
+        'REQUEST_URI'  => $_SERVER['REQUEST_URI'],
+        'scriptDir'    => $scriptDir,
+    ]);
+    exit;
+}
+
 // ── Dispatch ──────────────────────────────────────────────────────────────────
 switch ($resource) {
     case 'auth':
