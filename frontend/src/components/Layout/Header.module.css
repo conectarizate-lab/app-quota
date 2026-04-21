@@ -11,6 +11,12 @@
   z-index: 50;
 }
 
+.left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .title {
   font-size: 1.125rem;
   font-weight: 600;
@@ -27,4 +33,36 @@
   font-size: 0.8125rem;
   color: var(--color-text-muted);
   font-weight: 500;
+}
+
+/* Hamburger — oculto en desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .header {
+    padding: 0 1rem;
+  }
 }

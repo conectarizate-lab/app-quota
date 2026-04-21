@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { to: '/configuracion',      label: 'Configuración',  icon: '⚙' },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ open, onClose }) {
   const { usuario, logout } = useAuth()
   const navigate = useNavigate()
 
@@ -21,7 +21,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${open ? styles.open : ''}`}>
       {/* Logo */}
       <div className={styles.logo}>
         <span className={styles.logoText}>Quota</span>
@@ -29,7 +29,7 @@ export default function Sidebar() {
 
       {/* Nuevo presupuesto */}
       <div className={styles.newBtnWrapper}>
-        <NavLink to="/presupuestos/nuevo" className={styles.newBtn}>
+        <NavLink to="/presupuestos/nuevo" className={styles.newBtn} onClick={onClose}>
           + Nuevo presupuesto
         </NavLink>
       </div>
@@ -40,6 +40,7 @@ export default function Sidebar() {
           <NavLink
             key={item.to}
             to={item.to}
+            onClick={onClose}
             className={({ isActive }) =>
               `${styles.navItem} ${isActive ? styles.active : ''}`
             }
