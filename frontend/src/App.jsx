@@ -2,19 +2,20 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import Layout from './components/Layout/Layout'
 
-import Login            from './pages/Login'
-import Register         from './pages/Register'
-import ForgotPassword  from './pages/ForgotPassword'
-import ResetPassword   from './pages/ResetPassword'
-import Dashboard        from './pages/Dashboard'
-import Servicios        from './pages/Servicios'
-import Clientes         from './pages/Clientes'
-import NuevoPresupuesto from './pages/NuevoPresupuesto'
+import Login             from './pages/Login'
+import Register          from './pages/Register'
+import ForgotPassword    from './pages/ForgotPassword'
+import ResetPassword     from './pages/ResetPassword'
+import Dashboard         from './pages/Dashboard'
+import Servicios         from './pages/Servicios'
+import Clientes          from './pages/Clientes'
+import NuevoPresupuesto  from './pages/NuevoPresupuesto'
 import EditarPresupuesto from './pages/EditarPresupuesto'
-import VerPresupuesto   from './pages/VerPresupuesto'
-import Vencimientos     from './pages/Vencimientos'
-import Historial        from './pages/Historial'
-import Configuracion    from './pages/Configuracion'
+import VerPresupuesto    from './pages/VerPresupuesto'
+import Vencimientos      from './pages/Vencimientos'
+import Historial         from './pages/Historial'
+import Configuracion     from './pages/Configuracion'
+import Admin             from './pages/Admin'
 
 function PrivateRoute({ children }) {
   const { token, loading } = useAuth()
@@ -26,6 +27,14 @@ function PublicRoute({ children }) {
   const { token, loading } = useAuth()
   if (loading) return <div className="loading-screen">Cargando...</div>
   return token ? <Navigate to="/dashboard" replace /> : children
+}
+
+function AdminRoute({ children }) {
+  const { token, loading, usuario } = useAuth()
+  if (loading) return <div className="loading-screen">Cargando...</div>
+  if (!token) return <Navigate to="/login" replace />
+  if (usuario && usuario.rol !== 'admin') return <Navigate to="/dashboard" replace />
+  return children
 }
 
 export default function App() {
@@ -40,15 +49,16 @@ export default function App() {
       {/* Rutas privadas con layout */}
       <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
         <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard"                    element={<Dashboard />} />
-        <Route path="servicios"                    element={<Servicios />} />
-        <Route path="clientes"                     element={<Clientes />} />
-        <Route path="presupuestos/nuevo"            element={<NuevoPresupuesto />} />
-        <Route path="presupuestos/:id/editar"       element={<EditarPresupuesto />} />
-        <Route path="presupuestos/:id"              element={<VerPresupuesto />} />
-        <Route path="vencimientos"                 element={<Vencimientos />} />
-        <Route path="historial"                    element={<Historial />} />
-        <Route path="configuracion"                element={<Configuracion />} />
+        <Route path="dashboard"               element={<Dashboard />} />
+        <Route path="servicios"               element={<Servicios />} />
+        <Route path="clientes"                element={<Clientes />} />
+        <Route path="presupuestos/nuevo"      element={<NuevoPresupuesto />} />
+        <Route path="presupuestos/:id/editar" element={<EditarPresupuesto />} />
+        <Route path="presupuestos/:id"        element={<VerPresupuesto />} />
+        <Route path="vencimientos"            element={<Vencimientos />} />
+        <Route path="historial"               element={<Historial />} />
+        <Route path="configuracion"           element={<Configuracion />} />
+        <Route path="admin"                   element={<AdminRoute><Admin /></AdminRoute>} />
       </Route>
 
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

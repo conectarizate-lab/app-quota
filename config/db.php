@@ -39,6 +39,7 @@ function respond(bool $success, mixed $data = null, string $message = '', int $s
         $body['data'] = $data;
     } else {
         $body['message'] = $message;
+        if ($data !== null) $body['data'] = $data;
     }
     echo json_encode($body, JSON_UNESCAPED_UNICODE);
     exit;

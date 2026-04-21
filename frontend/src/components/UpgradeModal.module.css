@@ -1,0 +1,102 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #999;
+  line-height: 1;
+  padding: 0.25rem;
+}
+.close:hover { color: #333; }
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 0.75rem;
+}
+
+.text {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.benefits {
+  background: #f8f9ff;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.benefitsTitle {
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.benefits ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #555;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.btnUpgrade {
+  display: block;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  transition: background 0.2s;
+}
+.btnUpgrade:hover { background: #1ebe57; }
+
+.btnCancel {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.88rem;
+  text-decoration: underline;
+  padding: 0.25rem;
+}
+.btnCancel:hover { color: #555; }

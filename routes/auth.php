@@ -36,11 +36,12 @@ if ($method === 'POST' && $id === 'register') {
         respond(false, null, 'Ya existe una cuenta con ese email', 409);
     }
 
-    $hash = password_hash($pass, PASSWORD_BCRYPT);
+    $hash        = password_hash($pass, PASSWORD_BCRYPT);
+    $trialExpira = date('Y-m-d H:i:s', strtotime('+30 days'));
     $db->prepare(
-        'INSERT INTO usuarios (nombre, email, password_hash, empresa, moneda_default)
-         VALUES (?, ?, ?, ?, ?)'
-    )->execute([$nombre, $email, $hash, $empresa, $moneda]);
+        'INSERT INTO usuarios (nombre, email, password_hash, empresa, moneda_default, plan, trial_expira_en, plan_origen)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+    )->execute([$nombre, $email, $hash, $empresa, $moneda, 'pro', $trialExpira, 'trial']);
 
     $userId = (int) $db->lastInsertId();
     $token  = jwt_create([
@@ -53,12 +54,15 @@ if ($method === 'POST' && $id === 'register') {
     respond(true, [
         'token'   => $token,
         'usuario' => [
-            'id'             => $userId,
-            'nombre'         => $nombre,
-            'email'          => $email,
-            'empresa'        => $empresa,
-            'moneda_default' => $moneda,
-            'plan'           => 'free',
+            'id'              => $userId,
+            'nombre'          => $nombre,
+            'email'           => $email,
+            'empresa'         => $empresa,
+            'moneda_default'  => $moneda,
+            'plan'            => 'pro',
+            'trial_expira_en' => $trialExpira,
+            'plan_origen'     => 'trial',
+            'rol'             => 'user',
         ],
     ], '', 201);
 }
@@ -82,9 +86,26 @@ if ($method === 'POST' && $id === 'login') {
         respond(false, null, 'Credenciales incorrectas', 401);
     }
 
+    // Enviar aviso si el trial vence en ≤6 días (una sola vez)
+    if (
+        $user['plan'] === 'pro' &&
+        $user['trial_expira_en'] !== null &&
+        !($user['trial_aviso_enviado'] ?? 0)
+    ) {
+        $daysLeft = (int) ceil((strtotime($user['trial_expira_en']) - time()) / 86400);
+        if ($daysLeft <= 6 && $daysLeft > 0) {
+            $subject = 'Quota — Tu prueba Pro vence pronto';
+            $msg     = "Hola {$user['nombre']},\n\nTe quedan $daysLeft día" . ($daysLeft !== 1 ? 's' : '') . " de tu prueba Pro en Quota.\n\nPara seguir con acceso completo escribinos por WhatsApp:\nhttps://wa.me/5492215450899\n\nQuota by Conectarizate";
+            $headers = "From: Quota <noreply@conectarizate.com>\r\nContent-Type: text/plain; charset=UTF-8";
+            mail($user['email'], $subject, $msg, $headers);
+            $db->prepare('UPDATE usuarios SET trial_aviso_enviado = 1 WHERE id = ?')->execute([$user['id']]);
+        }
+    }
+
     $token = jwt_create([
         'sub'   => $user['id'],
         'email' => $user['email'],
+        'rol'   => $user['rol'] ?? 'user',
         'iat'   => time(),
         'exp'   => time() + JWT_EXPIRY,
     ]);
@@ -92,12 +113,15 @@ if ($method === 'POST' && $id === 'login') {
     respond(true, [
         'token'   => $token,
         'usuario' => [
-            'id'             => $user['id'],
-            'nombre'         => $user['nombre'],
-            'email'          => $user['email'],
-            'empresa'        => $user['empresa'],
-            'moneda_default' => $user['moneda_default'],
-            'plan'           => $user['plan'],
+            'id'              => $user['id'],
+            'nombre'          => $user['nombre'],
+            'email'           => $user['email'],
+            'empresa'         => $user['empresa'],
+            'moneda_default'  => $user['moneda_default'],
+            'plan'            => $user['plan'],
+            'trial_expira_en' => $user['trial_expira_en'] ?? null,
+            'plan_origen'     => $user['plan_origen'] ?? 'trial',
+            'rol'             => $user['rol'] ?? 'user',
         ],
     ]);
 }
@@ -107,13 +131,17 @@ if ($method === 'GET' && $id === 'me') {
     $auth = require_auth();
     $db   = getDB();
     $stmt = $db->prepare(
-        'SELECT id, nombre, email, empresa, moneda_default, plan, created_at
+        'SELECT id, nombre, email, empresa, moneda_default, plan, trial_expira_en, plan_origen, rol, created_at
          FROM usuarios WHERE id = ? AND activo = 1'
     );
     $stmt->execute([$auth['sub']]);
     $user = $stmt->fetch();
     if (!$user) respond(false, null, 'Usuario no encontrado', 404);
-    respond(true, ['usuario' => $user]);
+    respond(true, ['usuario' => array_merge($user, [
+        'trial_expira_en' => $user['trial_expira_en'] ?? null,
+        'plan_origen'     => $user['plan_origen']     ?? 'trial',
+        'rol'             => $user['rol']             ?? 'user',
+    ])]);
 }
 
 // PUT /auth/me

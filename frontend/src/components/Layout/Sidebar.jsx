@@ -49,6 +49,18 @@ export default function Sidebar({ open, onClose }) {
             {item.label}
           </NavLink>
         ))}
+        {usuario?.rol === 'admin' && (
+          <NavLink
+            to="/admin"
+            onClick={onClose}
+            className={({ isActive }) =>
+              `${styles.navItem} ${isActive ? styles.active : ''}`
+            }
+          >
+            <span className={styles.icon}>⚑</span>
+            Admin
+          </NavLink>
+        )}
       </nav>
 
       {/* Usuario + logout */}

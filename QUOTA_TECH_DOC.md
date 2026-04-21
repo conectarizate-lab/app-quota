@@ -27,7 +27,7 @@ Cada usuario tiene sus datos completamente aislados. No hay datos compartidos en
 | Build tool | Vite | Compilación y bundling del frontend |
 | Router frontend | React Router v6 | Navegación client-side |
 | HTTP client | Axios | Llamadas a la API REST |
-| Estilos | CSS Modules | Estilos scoped por componente |
+| Estilos | CSS Modules | Estilos scoped por componente, responsive mobile |
 | PDF | jsPDF + html2canvas | Generación de PDF en el navegador |
 | Backend | PHP 8.1+ | API REST pura, sin framework |
 | Base de datos | MySQL 8 | Relacional, hosted en Hostinger |
@@ -387,6 +387,10 @@ define('JWT_EXPIRY', 604800);
 ---
 
 ## 10. Funcionalidades implementadas (MVP completo)
+
+### UI / Responsive
+- [x] Sidebar responsive: oculto en mobile, se abre con botón hamburguesa (☰) en el header, overlay oscuro al abrirse, se cierra al navegar o tocar fuera
+- [x] Breakpoint mobile: ≤768px
 
 ### Autenticación
 - [x] Registro con email y contraseña

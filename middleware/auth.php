@@ -50,7 +50,8 @@ function jwt_decode(string $token): ?array
 }
 
 /**
- * Validates Authorization header. Returns JWT payload or exits with 401.
+ * Validates Authorization header, checks trial expiration, sets globals.
+ * Returns JWT payload or exits with 401.
  */
 function require_auth(): array
 {
@@ -62,5 +63,27 @@ function require_auth(): array
     if (!$payload) {
         respond(false, null, 'Token inválido o expirado', 401);
     }
+
+    $db   = getDB();
+    $stmt = $db->prepare('SELECT plan, trial_expira_en, rol FROM usuarios WHERE id = ? AND activo = 1');
+    $stmt->execute([$payload['sub']]);
+    $user = $stmt->fetch();
+
+    if (!$user) {
+        respond(false, null, 'Usuario no encontrado', 401);
+    }
+
+    if (
+        $user['plan'] === 'pro' &&
+        $user['trial_expira_en'] !== null &&
+        strtotime($user['trial_expira_en']) < time()
+    ) {
+        $db->prepare('UPDATE usuarios SET plan = ? WHERE id = ?')->execute(['free', $payload['sub']]);
+        $user['plan'] = 'free';
+    }
+
+    $GLOBALS['current_plan'] = $user['plan'];
+    $GLOBALS['current_rol']  = $user['rol'] ?? 'user';
+
     return $payload;
 }

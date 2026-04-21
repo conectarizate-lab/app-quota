@@ -12,13 +12,19 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-// Si el servidor responde 401, limpiar sesión y redirigir
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
       window.location.href = '/login'
+    }
+    if (
+      error.response?.status === 403 &&
+      error.response?.data?.message === 'limite_alcanzado'
+    ) {
+      const { recurso, limite } = error.response.data?.data ?? {}
+      window.dispatchEvent(new CustomEvent('quota:limite', { detail: { recurso, limite } }))
     }
     return Promise.reject(error)
   }

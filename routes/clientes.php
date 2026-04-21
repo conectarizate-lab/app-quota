@@ -24,6 +24,13 @@ if ($method === 'GET' && !$id) {
 
 // POST /clientes
 if ($method === 'POST' && !$id) {
+    if (($GLOBALS['current_plan'] ?? 'free') === 'free') {
+        $cnt = $db->prepare('SELECT COUNT(*) FROM clientes WHERE usuario_id = ?');
+        $cnt->execute([$userId]);
+        if ($cnt->fetchColumn() >= 3) {
+            respond(false, ['recurso' => 'clientes', 'limite' => 3], 'limite_alcanzado', 403);
+        }
+    }
     $body   = getBody();
     $nombre = trim($body['nombre'] ?? '');
     if (!$nombre) respond(false, null, 'El nombre del cliente es requerido', 422);

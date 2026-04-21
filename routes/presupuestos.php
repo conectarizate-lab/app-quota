@@ -90,6 +90,13 @@ if ($method === 'GET' && !$id) {
 
 // ── POST /presupuestos ────────────────────────────────────────────────────────
 if ($method === 'POST' && !$id) {
+    if (($GLOBALS['current_plan'] ?? 'free') === 'free') {
+        $cnt = $db->prepare('SELECT presupuestos_creados FROM usuarios WHERE id = ?');
+        $cnt->execute([$userId]);
+        if ((int) $cnt->fetchColumn() >= 2) {
+            respond(false, ['recurso' => 'presupuestos', 'limite' => 2], 'limite_alcanzado', 403);
+        }
+    }
     $body  = getBody();
     $items = $body['items'] ?? [];
     if (empty($items)) respond(false, null, 'El presupuesto debe tener al menos un ítem', 422);
@@ -122,6 +129,7 @@ if ($method === 'POST' && !$id) {
         ]);
         $presupuestoId = (int) $db->lastInsertId();
         insertarItems($db, $presupuestoId, $items);
+        $db->prepare('UPDATE usuarios SET presupuestos_creados = presupuestos_creados + 1 WHERE id = ?')->execute([$userId]);
         $db->commit();
     } catch (Exception $e) {
         $db->rollBack();

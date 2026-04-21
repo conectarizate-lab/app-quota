@@ -98,6 +98,13 @@ if ($method === 'GET' && $id === null) {
 
 // POST /vencimientos
 if ($method === 'POST' && $id === null) {
+    if (($GLOBALS['current_plan'] ?? 'free') === 'free') {
+        $cnt = $db->prepare('SELECT COUNT(*) FROM vencimientos WHERE usuario_id = ?');
+        $cnt->execute([$uid]);
+        if ($cnt->fetchColumn() >= 3) {
+            respond(false, ['recurso' => 'vencimientos', 'limite' => 3], 'limite_alcanzado', 403);
+        }
+    }
     $body       = getBody();
     $tipo       = in_array($body['tipo'] ?? '', ['cobro', 'pago']) ? $body['tipo'] : null;
     $concepto   = trim($body['concepto'] ?? '');

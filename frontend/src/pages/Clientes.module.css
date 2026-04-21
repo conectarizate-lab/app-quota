@@ -294,3 +294,35 @@
   gap: 0.75rem;
   padding-top: 0.5rem;
 }
+
+/* WhatsApp selector */
+.waGroup {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.waSelect {
+  padding: 0.6rem 0.5rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  outline: none;
+  flex-shrink: 0;
+  width: auto;
+}
+.waSelect:focus { border-color: var(--color-primary); }
+
+.waInput {
+  flex: 1;
+  padding: 0.6rem 0.875rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  outline: none;
+  min-width: 0;
+}
+.waInput:focus { border-color: var(--color-primary); }

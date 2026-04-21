@@ -2,17 +2,36 @@ import { useState, useEffect } from 'react'
 import { getClientes, createCliente, updateCliente, deleteCliente } from '../api/clientes'
 import styles from './Clientes.module.css'
 
-const EMPTY_FORM = { nombre: '', email: '', whatsapp: '', empresa: '', notas: '' }
+const CODIGOS = [
+  { code: '+54',  label: '🇦🇷 +54'  },
+  { code: '+598', label: '🇺🇾 +598' },
+  { code: '+56',  label: '🇨🇱 +56'  },
+  { code: '+55',  label: '🇧🇷 +55'  },
+  { code: '+52',  label: '🇲🇽 +52'  },
+  { code: '+57',  label: '🇨🇴 +57'  },
+  { code: '+34',  label: '🇪🇸 +34'  },
+  { code: '+1',   label: '🇺🇸 +1'   },
+]
+
+function parseWhatsapp(raw) {
+  if (!raw) return { codigo: '+54', numero: '' }
+  for (const { code } of CODIGOS) {
+    if (raw.startsWith(code)) return { codigo: code, numero: raw.slice(code.length).trim() }
+  }
+  return { codigo: '+54', numero: raw }
+}
+
+const EMPTY_FORM = { nombre: '', email: '', whatsappCodigo: '+54', whatsappNumero: '', empresa: '', notas: '' }
 
 export default function Clientes() {
-  const [clientes, setClientes] = useState([])
-  const [loading, setLoading]   = useState(true)
-  const [error, setError]       = useState('')
-  const [modal, setModal]       = useState(false)
-  const [editing, setEditing]   = useState(null)
-  const [form, setForm]         = useState(EMPTY_FORM)
-  const [saving, setSaving]     = useState(false)
-  const [formError, setFormError] = useState('')
+  const [clientes,   setClientes]   = useState([])
+  const [loading,    setLoading]    = useState(true)
+  const [error,      setError]      = useState('')
+  const [modal,      setModal]      = useState(false)
+  const [editing,    setEditing]    = useState(null)
+  const [form,       setForm]       = useState(EMPTY_FORM)
+  const [saving,     setSaving]     = useState(false)
+  const [formError,  setFormError]  = useState('')
 
   const load = async () => {
     try {
@@ -36,21 +55,20 @@ export default function Clientes() {
 
   const openEdit = (c) => {
     setEditing(c)
+    const { codigo, numero } = parseWhatsapp(c.whatsapp)
     setForm({
-      nombre:   c.nombre,
-      email:    c.email    || '',
-      whatsapp: c.whatsapp || '',
-      empresa:  c.empresa  || '',
-      notas:    c.notas    || '',
+      nombre:          c.nombre,
+      email:           c.email    || '',
+      whatsappCodigo:  codigo,
+      whatsappNumero:  numero,
+      empresa:         c.empresa  || '',
+      notas:           c.notas    || '',
     })
     setFormError('')
     setModal(true)
   }
 
-  const closeModal = () => {
-    setModal(false)
-    setEditing(null)
-  }
+  const closeModal = () => { setModal(false); setEditing(null) }
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
@@ -59,12 +77,23 @@ export default function Clientes() {
     setFormError('')
     if (!form.nombre.trim()) return setFormError('El nombre es obligatorio')
 
+    const whatsapp = form.whatsappNumero.trim()
+      ? `${form.whatsappCodigo}${form.whatsappNumero.trim()}`
+      : ''
+
     setSaving(true)
     try {
+      const payload = {
+        nombre:   form.nombre,
+        email:    form.email,
+        whatsapp,
+        empresa:  form.empresa,
+        notas:    form.notas,
+      }
       if (editing) {
-        await updateCliente(editing.id, form)
+        await updateCliente(editing.id, payload)
       } else {
-        await createCliente(form)
+        await createCliente(payload)
       }
       await load()
       closeModal()
@@ -196,14 +225,26 @@ export default function Clientes() {
                   />
                 </div>
                 <div className={styles.field}>
-                  <label htmlFor="whatsapp">WhatsApp</label>
-                  <input
-                    id="whatsapp"
-                    name="whatsapp"
-                    value={form.whatsapp}
-                    onChange={handleChange}
-                    placeholder="+54 9 11 1234 5678"
-                  />
+                  <label>WhatsApp</label>
+                  <div className={styles.waGroup}>
+                    <select
+                      name="whatsappCodigo"
+                      value={form.whatsappCodigo}
+                      onChange={handleChange}
+                      className={styles.waSelect}
+                    >
+                      {CODIGOS.map(c => (
+                        <option key={c.code} value={c.code}>{c.label}</option>
+                      ))}
+                    </select>
+                    <input
+                      name="whatsappNumero"
+                      value={form.whatsappNumero}
+                      onChange={handleChange}
+                      placeholder="911 234 5678"
+                      className={styles.waInput}
+                    />
+                  </div>
                 </div>
               </div>
 
