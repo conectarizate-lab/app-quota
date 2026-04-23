@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import Layout from './components/Layout/Layout'
 
+import Landing            from './pages/Landing'
 import Login             from './pages/Login'
 import Register          from './pages/Register'
 import ForgotPassword    from './pages/ForgotPassword'
@@ -16,6 +17,12 @@ import Vencimientos      from './pages/Vencimientos'
 import Historial         from './pages/Historial'
 import Configuracion     from './pages/Configuracion'
 import Admin             from './pages/Admin'
+
+function RootRoute() {
+  const { token, loading } = useAuth()
+  if (loading) return <div className="loading-screen">Cargando...</div>
+  return token ? <Navigate to="/dashboard" replace /> : <Landing />
+}
 
 function PrivateRoute({ children }) {
   const { token, loading } = useAuth()
@@ -40,6 +47,9 @@ function AdminRoute({ children }) {
 export default function App() {
   return (
     <Routes>
+      {/* Landing */}
+      <Route path="/" element={<RootRoute />} />
+
       {/* Rutas públicas */}
       <Route path="/login"           element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/register"        element={<PublicRoute><Register /></PublicRoute>} />
@@ -47,8 +57,7 @@ export default function App() {
       <Route path="/reset-password"  element={<ResetPassword />} />
 
       {/* Rutas privadas con layout */}
-      <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
+      <Route element={<PrivateRoute><Layout /></PrivateRoute>}>
         <Route path="dashboard"               element={<Dashboard />} />
         <Route path="servicios"               element={<Servicios />} />
         <Route path="clientes"                element={<Clientes />} />
@@ -61,7 +70,7 @@ export default function App() {
         <Route path="admin"                   element={<AdminRoute><Admin /></AdminRoute>} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }

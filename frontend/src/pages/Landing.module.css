@@ -1,0 +1,553 @@
+/* ── Tokens ───────────────────────────────────── */
+:root {
+  --navy:   #344152;
+  --orange: #BA683C;
+  --cream:  #F3F1EC;
+  --light:  #f8f7f4;
+}
+
+/* ── Base ─────────────────────────────────────── */
+.page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--navy);
+  line-height: 1.6;
+}
+
+/* ── Nav ──────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #ece9e3;
+}
+
+.navInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.85rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.navBrand {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--navy);
+  letter-spacing: -0.3px;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btnGhost {
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.btnGhost:hover { background: var(--light); }
+
+.btnNavCta {
+  background: var(--orange);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.btnNavCta:hover { background: #a85a30; }
+
+/* ── Hero ─────────────────────────────────────── */
+.hero {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 5rem 2rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.heroInner { max-width: 520px; }
+
+.heroBadge {
+  display: inline-block;
+  background: rgba(186, 104, 60, 0.25);
+  color: #e8a07a;
+  border: 1px solid rgba(186, 104, 60, 0.4);
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.heroTitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0 0 1.25rem;
+  color: var(--cream);
+}
+
+.heroAccent { color: var(--orange); }
+
+.heroSub {
+  font-size: 1.05rem;
+  color: rgba(243, 241, 236, 0.75);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.btnHeroCta {
+  background: var(--orange);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.8rem 1.75rem;
+  border-radius: 10px;
+  transition: background 0.2s, transform 0.1s;
+}
+.btnHeroCta:hover { background: #a85a30; transform: translateY(-1px); }
+
+.btnHeroGhost {
+  color: rgba(243, 241, 236, 0.7);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid rgba(243, 241, 236, 0.2);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btnHeroGhost:hover {
+  border-color: rgba(243, 241, 236, 0.5);
+  color: var(--cream);
+}
+
+/* ── Mock card (hero visual) ──────────────────── */
+.heroVisual {
+  display: flex;
+  justify-content: center;
+}
+
+.mockCard {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+
+.mockHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.mockNum { font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+
+.mockBadge {
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+}
+
+.mockClient {
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.mockItems { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.mockItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.mockDivider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 1rem 0 0.75rem;
+}
+
+.mockTotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+}
+
+.mockActions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.mockBtn {
+  flex: 1;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: var(--light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ── Features ─────────────────────────────────── */
+.features {
+  background: var(--light);
+  padding: 5rem 2rem;
+}
+
+.sectionInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 0.75rem;
+  color: var(--navy);
+}
+
+.sectionSub {
+  text-align: center;
+  color: #777;
+  font-size: 1rem;
+  margin-bottom: 3rem;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.featureCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.75rem;
+  border: 1px solid #ece9e3;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.featureCard:hover {
+  box-shadow: 0 8px 24px rgba(52, 65, 82, 0.1);
+  transform: translateY(-2px);
+}
+
+.featureIcon { font-size: 1.75rem; margin-bottom: 0.85rem; }
+
+.featureTitle {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+  color: var(--navy);
+}
+
+.featureDesc { font-size: 0.88rem; color: #666; line-height: 1.6; margin: 0; }
+
+/* ── Pricing ──────────────────────────────────── */
+.pricing {
+  background: #fff;
+  padding: 5rem 2rem;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
+}
+
+.planCard {
+  border: 2px solid #ece9e3;
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  background: #fff;
+}
+
+.planCardPro {
+  border-color: var(--orange);
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.planProBadge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.85rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.planName {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.planCardPro .planName { color: var(--cream); }
+
+.planPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.planAmount {
+  font-family: Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--navy);
+}
+.planCardPro .planAmount { color: var(--cream); }
+
+.planPer { font-size: 0.9rem; color: #999; }
+.planCardPro .planPer { color: rgba(243,241,236,0.6); }
+
+.planAnnual {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0 0 0.5rem;
+}
+.planCardPro .planAnnual { color: rgba(243,241,236,0.6); }
+
+.planSave { color: var(--orange); font-weight: 600; }
+.planCardPro .planSave { color: #e8a07a; }
+
+.planDesc {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+.planCardPro .planDesc { color: rgba(243,241,236,0.6); }
+
+.planFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.planFeatures li {
+  font-size: 0.88rem;
+  color: #555;
+  padding-left: 1.25rem;
+  position: relative;
+}
+.planFeatures li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-weight: 700;
+}
+.planCardPro .planFeatures li { color: rgba(243,241,236,0.85); }
+
+.btnPlanFree {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  padding: 0.7rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+.btnPlanFree:hover { background: var(--navy); color: #fff; }
+
+.btnPlanPro {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: var(--orange);
+  color: #fff;
+  padding: 0.7rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.btnPlanPro:hover { background: #a85a30; }
+
+.pricingNote {
+  text-align: center;
+  font-size: 0.88rem;
+  color: #888;
+}
+
+.pricingWa {
+  color: #25d366;
+  font-weight: 600;
+  text-decoration: none;
+}
+.pricingWa:hover { text-decoration: underline; }
+
+/* ── CTA Final ────────────────────────────────── */
+.ctaFinal {
+  background: var(--navy);
+  padding: 5rem 2rem;
+}
+
+.ctaInner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaTitle {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--cream);
+  margin: 0;
+}
+
+.ctaSub {
+  color: rgba(243, 241, 236, 0.7);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.btnCtaFinal {
+  display: inline-block;
+  background: var(--orange);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  margin-top: 0.5rem;
+  transition: background 0.2s, transform 0.1s;
+}
+.btnCtaFinal:hover { background: #a85a30; transform: translateY(-1px); }
+
+/* ── Footer ───────────────────────────────────── */
+.footer {
+  background: #242e3a;
+  padding: 1.5rem 2rem;
+}
+
+.footerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerBrand {
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+}
+
+.footerBy {
+  font-size: 0.78rem;
+  color: rgba(243,241,236,0.4);
+}
+
+.footerLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footerLinks a {
+  color: rgba(243, 241, 236, 0.5);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.15s;
+}
+.footerLinks a:hover { color: var(--cream); }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  .heroActions { justify-content: center; }
+  .heroVisual { display: none; }
+
+  .featuresGrid { grid-template-columns: 1fr; }
+
+  .pricingGrid { grid-template-columns: 1fr; }
+
+  .navInner { padding: 0.75rem 1.25rem; }
+  .navBrand { font-size: 1.2rem; }
+
+  .features, .pricing, .ctaFinal { padding: 3rem 1.5rem; }
+}
