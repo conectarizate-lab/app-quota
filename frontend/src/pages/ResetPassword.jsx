@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { resetPassword } from '../api/auth'
+import PasswordInput from '../components/UI/PasswordInput'
 import styles from './Login.module.css'
 
 export default function ResetPassword() {
@@ -59,10 +60,9 @@ export default function ResetPassword() {
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.field}>
               <label htmlFor="password">Nueva contraseña</label>
-              <input
+              <PasswordInput
                 id="password"
                 name="password"
-                type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mínimo 8 caracteres"
@@ -74,10 +74,9 @@ export default function ResetPassword() {
 
             <div className={styles.field}>
               <label htmlFor="confirm">Repetir contraseña</label>
-              <input
+              <PasswordInput
                 id="confirm"
                 name="confirm"
-                type="password"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
                 placeholder="Repetí la contraseña"

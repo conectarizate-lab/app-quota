@@ -127,7 +127,7 @@ export default function Landing() {
         <div className={styles.sectionInner}>
           <h2 className={styles.sectionTitle}>Todo lo que necesitás para cotizar mejor</h2>
           <p className={styles.sectionSub}>
-            Diseñado para freelancers, agencias y PYMEs de Argentina y Uruguay.
+            Diseñado para freelancers, agencias y PYMEs.
           </p>
           <div className={styles.featuresGrid}>
             {FEATURES.map((f) => (

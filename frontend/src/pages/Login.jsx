@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { login as loginApi } from '../api/auth'
 import { useAuth } from '../hooks/useAuth'
+import PasswordInput from '../components/UI/PasswordInput'
 import styles from './Login.module.css'
 
 export default function Login() {
@@ -53,10 +54,9 @@ export default function Login() {
 
           <div className={styles.field}>
             <label htmlFor="password">Contraseña</label>
-            <input
+            <PasswordInput
               id="password"
               name="password"
-              type="password"
               value={form.password}
               onChange={handleChange}
               placeholder="••••••••"

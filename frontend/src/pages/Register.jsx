@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { register as registerApi } from '../api/auth'
 import { useAuth } from '../hooks/useAuth'
+import PasswordInput from '../components/UI/PasswordInput'
 import styles from './Register.module.css'
 
 export default function Register() {
@@ -86,10 +87,9 @@ export default function Register() {
 
           <div className={styles.field}>
             <label htmlFor="password">Contraseña * (mínimo 8 caracteres)</label>
-            <input
+            <PasswordInput
               id="password"
               name="password"
-              type="password"
               value={form.password}
               onChange={handleChange}
               placeholder="••••••••"

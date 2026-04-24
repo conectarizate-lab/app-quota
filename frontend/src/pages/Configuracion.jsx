@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { updateMe } from '../api/auth'
 import { useAuth } from '../hooks/useAuth'
+import PasswordInput from '../components/UI/PasswordInput'
 import styles from './Configuracion.module.css'
 
 export default function Configuracion() {
@@ -168,10 +169,9 @@ export default function Configuracion() {
           <form onSubmit={handlePassSubmit} className={styles.form}>
             <div className={styles.field}>
               <label htmlFor="nueva">Nueva contraseña</label>
-              <input
+              <PasswordInput
                 id="nueva"
                 name="nueva"
-                type="password"
                 value={pass.nueva}
                 onChange={handlePassChange}
                 placeholder="Mínimo 8 caracteres"
@@ -181,10 +181,9 @@ export default function Configuracion() {
 
             <div className={styles.field}>
               <label htmlFor="confirmar">Confirmar contraseña</label>
-              <input
+              <PasswordInput
                 id="confirmar"
                 name="confirmar"
-                type="password"
                 value={pass.confirmar}
                 onChange={handlePassChange}
                 placeholder="Repetí la nueva contraseña"
