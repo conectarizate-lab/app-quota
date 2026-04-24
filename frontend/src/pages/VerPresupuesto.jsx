@@ -4,6 +4,7 @@ import { getPresupuesto, updateEstado, deletePresupuesto } from '../api/presupue
 import { formatCurrency } from '../utils/formatCurrency'
 import { generarTextoWhatsApp, generarTextoEmail } from '../utils/presupuestoTexto'
 import { generatePDF } from '../utils/generatePDF'
+import { useAuth } from '../hooks/useAuth'
 import styles from './VerPresupuesto.module.css'
 
 const ESTADOS = [
@@ -25,8 +26,9 @@ function EstadoBadge({ estado }) {
 }
 
 export default function VerPresupuesto() {
-  const { id }   = useParams()
-  const navigate = useNavigate()
+  const { id }      = useParams()
+  const navigate    = useNavigate()
+  const { usuario } = useAuth()
 
   const [presupuesto, setPresupuesto] = useState(null)
   const [loading, setLoading]         = useState(true)
@@ -85,7 +87,7 @@ export default function VerPresupuesto() {
   const handlePDF = async () => {
     setGenerandoPDF(true)
     try {
-      await generatePDF(presupuesto)
+      await generatePDF(presupuesto, usuario)
     } catch {
       alert('Error al generar el PDF')
     } finally {

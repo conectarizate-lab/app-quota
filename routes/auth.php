@@ -36,12 +36,13 @@ if ($method === 'POST' && $id === 'register') {
         respond(false, null, 'Ya existe una cuenta con ese email', 409);
     }
 
+    $whatsapp    = trim($body['whatsapp'] ?? '');
     $hash        = password_hash($pass, PASSWORD_BCRYPT);
     $trialExpira = date('Y-m-d H:i:s', strtotime('+30 days'));
     $db->prepare(
-        'INSERT INTO usuarios (nombre, email, password_hash, empresa, moneda_default, plan, trial_expira_en, plan_origen)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
-    )->execute([$nombre, $email, $hash, $empresa, $moneda, 'pro', $trialExpira, 'trial']);
+        'INSERT INTO usuarios (nombre, email, password_hash, empresa, whatsapp, moneda_default, plan, trial_expira_en, plan_origen)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    )->execute([$nombre, $email, $hash, $empresa, $whatsapp, $moneda, 'pro', $trialExpira, 'trial']);
 
     $userId = (int) $db->lastInsertId();
     $token  = jwt_create([
@@ -58,6 +59,7 @@ if ($method === 'POST' && $id === 'register') {
             'nombre'          => $nombre,
             'email'           => $email,
             'empresa'         => $empresa,
+            'whatsapp'        => $whatsapp,
             'moneda_default'  => $moneda,
             'plan'            => 'pro',
             'trial_expira_en' => $trialExpira,
@@ -131,7 +133,7 @@ if ($method === 'GET' && $id === 'me') {
     $auth = require_auth();
     $db   = getDB();
     $stmt = $db->prepare(
-        'SELECT id, nombre, email, empresa, moneda_default, plan, trial_expira_en, plan_origen, rol, created_at
+        'SELECT id, nombre, email, empresa, whatsapp, moneda_default, plan, trial_expira_en, plan_origen, rol, created_at
          FROM usuarios WHERE id = ? AND activo = 1'
     );
     $stmt->execute([$auth['sub']]);
@@ -161,6 +163,9 @@ if ($method === 'PUT' && $id === 'me') {
     if (isset($body['moneda_default']) && in_array($body['moneda_default'], ['ARS', 'USD', 'UYU'])) {
         $fields[] = 'moneda_default = ?'; $params[] = $body['moneda_default'];
     }
+    if (isset($body['whatsapp'])) {
+        $fields[] = 'whatsapp = ?'; $params[] = trim($body['whatsapp']);
+    }
     if (!empty($body['password'])) {
         if (strlen($body['password']) < 8) {
             respond(false, null, 'La contraseña debe tener al menos 8 caracteres', 422);
@@ -176,7 +181,7 @@ if ($method === 'PUT' && $id === 'me') {
        ->execute($params);
 
     $stmt = $db->prepare(
-        'SELECT id, nombre, email, empresa, moneda_default, plan FROM usuarios WHERE id = ?'
+        'SELECT id, nombre, email, empresa, whatsapp, moneda_default, plan FROM usuarios WHERE id = ?'
     );
     $stmt->execute([$auth['sub']]);
     respond(true, ['usuario' => $stmt->fetch()]);

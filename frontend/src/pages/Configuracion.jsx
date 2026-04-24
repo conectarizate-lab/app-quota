@@ -6,7 +6,7 @@ import styles from './Configuracion.module.css'
 export default function Configuracion() {
   const { usuario } = useAuth()
 
-  const [perfil, setPerfil] = useState({ nombre: '', empresa: '', moneda_default: 'ARS' })
+  const [perfil, setPerfil] = useState({ nombre: '', empresa: '', whatsapp: '', moneda_default: 'ARS' })
   const [savingPerfil, setSavingPerfil] = useState(false)
   const [perfilOk, setPerfilOk]         = useState(false)
   const [perfilError, setPerfilError]   = useState('')
@@ -19,9 +19,10 @@ export default function Configuracion() {
   useEffect(() => {
     if (usuario) {
       setPerfil({
-        nombre:          usuario.nombre        || '',
-        empresa:         usuario.empresa       || '',
-        moneda_default:  usuario.moneda_default || 'ARS',
+        nombre:          usuario.nombre         || '',
+        empresa:         usuario.empresa        || '',
+        whatsapp:        usuario.whatsapp       || '',
+        moneda_default:  usuario.moneda_default  || 'ARS',
       })
     }
   }, [usuario])
@@ -40,6 +41,7 @@ export default function Configuracion() {
       await updateMe({
         nombre:         perfil.nombre,
         empresa:        perfil.empresa,
+        whatsapp:       perfil.whatsapp,
         moneda_default: perfil.moneda_default,
       })
       setPerfilOk(true)
@@ -120,6 +122,18 @@ export default function Configuracion() {
                 onChange={handlePerfilChange}
                 placeholder="Nombre de tu empresa o estudio"
               />
+            </div>
+
+            <div className={styles.field}>
+              <label htmlFor="whatsapp">WhatsApp / Teléfono</label>
+              <input
+                id="whatsapp"
+                name="whatsapp"
+                value={perfil.whatsapp}
+                onChange={handlePerfilChange}
+                placeholder="+54 9 11 1234 5678"
+              />
+              <p className={styles.fieldHint}>Aparece en el PDF de tus presupuestos.</p>
             </div>
 
             <div className={styles.field}>
