@@ -255,3 +255,140 @@
   .statsGrid { grid-template-columns: 1fr; }
   .welcome { flex-direction: column; align-items: flex-start; }
 }
+
+/* ── Onboarding ──────────────────────────────── */
+.onboarding {
+  background: #fff;
+  border: 1.5px solid #ece9e3;
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+
+.onboardingHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.onboardingTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 0.2rem;
+}
+
+.onboardingSub {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.onboardingProgress {
+  flex: 1;
+  max-width: 200px;
+  height: 6px;
+  background: #f0ede8;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.onboardingBar {
+  height: 100%;
+  background: #BA683C;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stepCard {
+  border: 1.5px solid #ece9e3;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: box-shadow 0.2s;
+}
+.stepCard:hover { box-shadow: 0 4px 16px rgba(52,65,82,0.08); }
+
+.stepDone {
+  background: #faf9f7;
+  border-color: #d6d0c8;
+  opacity: 0.75;
+}
+
+.stepTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.stepNum {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f0ede8;
+  color: #888;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepNumDone {
+  background: #BA683C;
+  color: #fff;
+}
+
+.stepIcon {
+  font-size: 1.3rem;
+  opacity: 0.4;
+}
+
+.stepTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.stepDesc {
+  font-size: 0.83rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.stepCta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #BA683C;
+  text-decoration: none;
+}
+.stepCta:hover { text-decoration: underline; }
+
+.stepCompletado {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #aaa;
+}
+
+@media (max-width: 700px) {
+  .stepsGrid { grid-template-columns: 1fr; }
+  .onboardingProgress { display: none; }
+}
